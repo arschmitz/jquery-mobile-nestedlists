@@ -1,0 +1,16 @@
+.ui-content ul.ui-listview-nested{
+	margin-top:0;
+}
+.ui-content ul.ui-listview-nested-pushed{
+	margin-left:0;
+}
+.ui-content .ui-listview .ui-collapsible{
+	margin:0;
+	padding:0;
+}
+.ui-content .ui-listview .ui-collapsible .ui-collapsible-heading{
+	margin:0;
+}
+.ui-content .ui-listview .hidden-list{
+	display:none;
+}
