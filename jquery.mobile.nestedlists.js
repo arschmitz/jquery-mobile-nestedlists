@@ -1,7 +1,7 @@
 (function( $, window, undefined ) {
 	var link;
 
-	$.mobile.document.on( "click", ".ui-listview>a", function(){
+	$.mobile.document.on( "click", ".ui-listview>li>a", function(){
 		link = $( this );
 	});
 
