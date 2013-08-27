@@ -11,9 +11,6 @@
 .ui-content .ui-listview .ui-collapsible .ui-collapsible-heading{
 	margin:0;
 }
-.ui-content .ui-listview .hidden-list{
-	display:none;
-}
 .ui-listview-nested-pushed-border{
 	border-left:1px solid #ddd;
 }

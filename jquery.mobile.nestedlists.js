@@ -42,7 +42,8 @@
 
 			//get list contents
 			if( key === $.mobile.nestedlists.keys.hidden ){
-				nestedList = link.children("ul").clone().removeClass("hidden-list");
+				nestedList = link.children( "ul" ).clone();
+				link.children( "ul" ).css( "display", "none" );
 			} else if( key === $.mobile.nestedlists.keys.data ) {
 				nestedList = $.mobile.nestedlists.callback( pageName );
 			}
