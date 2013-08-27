@@ -14,7 +14,7 @@
 			//default callback assumes page is stored on 
 			//$.mobile.nestlists and is just an array or strings
 			callback: function( pageName ) {
-				var nestedList = list.clone();
+				var nestedList = $("<ul data-role='listview'></ul>");
 				$.each( $.mobile.nestedlists.pages[pageName], function ( index, value ) {
 					nestedList.append("<li>"+value+"</ul>");
 				});
@@ -24,7 +24,7 @@
 			page: $("<div data-role='page' class='nested-list-page'></div>"),
 			header: $("<div data-role='header'><a href='#' data-rel='back'>Back</a><h1></h1></div>"),
 			content: $("<div class='ui-content'></div>"),
-			list: $("<ul data-role='listview'></ul>")
+			
 		}
 	});
 
