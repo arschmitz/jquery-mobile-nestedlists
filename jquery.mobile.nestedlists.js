@@ -1,12 +1,7 @@
 (function( $, window, undefined ) {
-	var link,
-		pages = {},
-		page = $("<div data-role='page' class='nested-list-page'></div>"),
-		header = $("<div data-role='header' ><a href='#' data-rel='back'>Back</a><h1></h1></div>"),
-		content = $("<div class='ui-content'></div>"),
-		list = $("<ul data-role='listview'></ul>");
+	var link;
 
-	$.mobile.document.on( "click", "a", function(){
+	$.mobile.document.on( "click", ".ui-listview>a", function(){
 		link = $( this );
 	});
 
@@ -25,7 +20,11 @@
 				});
 				return nestedList;
 			},
-			pages: {}
+			pages: {},
+			page: $("<div data-role='page' class='nested-list-page'></div>"),
+			header: $("<div data-role='header'><a href='#' data-rel='back'>Back</a><h1></h1></div>"),
+			content: $("<div class='ui-content'></div>"),
+			list: $("<ul data-role='listview'></ul>")
 		}
 	});
 
