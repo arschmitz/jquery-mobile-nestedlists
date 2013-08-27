@@ -26,3 +26,8 @@
 	border-bottom: 0;
 }
 
+.listview-collapsible .ui-li-static,
+.listview-collapsible a.ui-btn {
+	border-right: 0;
+	border-left: 0;
+}
