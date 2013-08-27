@@ -14,3 +14,6 @@
 .ui-content .ui-listview .hidden-list{
 	display:none;
 }
+.ui-listview-nested-pushed-border{
+	border-left:1px solid #ddd;
+}
