@@ -29,6 +29,8 @@
 	});
 
 	$.mobile.document.on("pagebeforechange", function(e, data){
+		
+		$(".hidden-list").css( "display", "none" );
 
 		if( typeof data.toPage  === "string"){ 
 			var newPage, nestedList, pageName, pageID,
@@ -42,8 +44,7 @@
 
 			//get list contents
 			if( key === $.mobile.nestedlists.keys.hidden ){
-				nestedList = link.children( "ul" ).clone();
-				link.children( "ul" ).css( "display", "none" );
+				nestedList = link.children("ul").clone().removeClass("hidden-list");
 			} else if( key === $.mobile.nestedlists.keys.data ) {
 				nestedList = $.mobile.nestedlists.callback( pageName );
 			}
