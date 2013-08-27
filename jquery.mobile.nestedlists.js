@@ -38,7 +38,7 @@
 		if( key === $.mobile.nestedlists.keys.data ||  key === $.mobile.nestedlists.keys.hidden ){
 			pageID = data.toPage.split("&")[0].split("#")[1].replace("#","");
 			pageName = pageID.replace( key,"");
-			newPage = page.clone().attr("id",pageID);
+			newPage = $.mobile.nestedlists.page.clone().attr("id",pageID);
 
 			//get list contents
 			if( key === $.mobile.nestedlists.keys.hidden ){
@@ -47,8 +47,8 @@
 				nestedList = $.mobile.nestedlists.callback( pageName );
 			}
 			// Build new page  
-			newPage.append(header.clone().find("h1").text(pageName).end())
-				.append(content.clone())
+			newPage.append($.mobile.nestedlists.header.clone().find("h1").text(pageName).end())
+				.append($.mobile.nestedlists.content.clone())
 				.find("div.ui-content").append(nestedList);
 
 			// Remove Nested Page
