@@ -14,3 +14,15 @@
 .ui-listview-nested-pushed-border{
 	border-left:1px solid #ddd;
 }
+.listview-collapsible > .ui-collapsible-heading,
+.listview-collapsible > .ui-collapsible-heading > a.ui-btn {
+	border-top: 0;
+	border-left: 0;
+	border-right: 0;
+}
+.listview-collapsible > .ui-collapsible-content,
+.listview-collapsible.ui-collapsible-collapsed > .ui-collapsible-heading,
+.listview-collapsible.ui-collapsible-collapsed > .ui-collapsible-heading > a.ui-btn {
+	border-bottom: 0;
+}
+
