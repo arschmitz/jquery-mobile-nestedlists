@@ -1,70 +1,41 @@
 (function( $, window, undefined ) {
-	var link;
+	$.mobile.document.on("pagecreate", "div", function(){
+		$("ul>li>ul").css("display","none");
+		$("ul>li>ul").parent().addClass("ui-btn ui-btn-icon-right ui-icon-carat-r");
+	});
+	$.mobile.document.on( "click", ".ui-listview>li", function(){
+		if( $(this).children( "ul" ).length == 0 ) {
+			return;
+		}
+		var newPage = $.mobile.nestedlists.page.clone().uniqueId(),
+			nestedList  = $( this ).children("ul").clone().attr( "data-" + $.mobile.ns + "role", "listview" ).css("display","block"),
+			pageName = ( $( this.childNodes[0] ).text().replace(/^\s+|\s+$/g, '').length > 0 )? $( this.childNodes[0] ).text() : $( this.childNodes[1] ).text(),
+			pageID = newPage.attr( "id" );
 
-	$.mobile.document.on( "click", ".ui-listview>li>a", function(){
-		link = $( this );
+		// Build new page
+		newPage.append($.mobile.nestedlists.header.clone().find("h1").text(pageName).end())
+			.append($.mobile.nestedlists.content.clone())
+			.find("div.ui-content").append(nestedList);
+
+		$.mobile.pageContainer.append(newPage);
+
+		$.mobile.changePage( "#" + pageID );
+
+		// Remove Nested Page
+		$.mobile.document.one( "pagechange", function(){
+			$.mobile.document.one( "pagechange", function(){
+				$.mobile.document.one( "pagechange", function(){
+					$(".nested-list-page").remove();
+				});
+			});
+		});
 	});
 
 	$.extend( $.mobile, {
 		nestedlists: {
-			keys: {
-				"data": "ui-data-list",
-				"hidden": "ui-list"
-			},
-			//default callback assumes page is stored on 
-			//$.mobile.nestlists and is just an array or strings
-			callback: function( pageName ) {
-				var nestedList = $("<ul data-role='listview'></ul>");
-				$.each( $.mobile.nestedlists.pages[pageName], function ( index, value ) {
-					nestedList.append("<li>"+value+"</ul>");
-				});
-				return nestedList;
-			},
-			pages: {},
-			page: $("<div data-role='page' class='nested-list-page'></div>"),
+			page: $("<div data-role='page'></div>"),
 			header: $("<div data-role='header'><a href='#' data-rel='back'>Back</a><h1></h1></div>"),
-			content: $("<div class='ui-content'></div>"),
-			
-		}
-	});
-
-	$.mobile.document.on("pagebeforechange", function(e, data){
-		
-		$(".hidden-list").css( "display", "none" );
-
-		if( typeof data.toPage  === "string"){ 
-			var newPage, nestedList, pageName, pageID,
-				key = data.toPage.split("&")[1];      
-		}
-
-		if( key === $.mobile.nestedlists.keys.data ||  key === $.mobile.nestedlists.keys.hidden ){
-			pageID = data.toPage.split("&")[0].split("#")[1].replace("#","");
-			pageName = pageID.replace( key,"");
-			newPage = $.mobile.nestedlists.page.clone().attr("id",pageID);
-
-			//get list contents
-			if( key === $.mobile.nestedlists.keys.hidden ){
-				nestedList = link.children("ul").clone().removeClass("hidden-list");
-			} else if( key === $.mobile.nestedlists.keys.data ) {
-				nestedList = $.mobile.nestedlists.callback( pageName );
-			}
-			// Build new page  
-			newPage.append($.mobile.nestedlists.header.clone().find("h1").text(pageName).end())
-				.append($.mobile.nestedlists.content.clone())
-				.find("div.ui-content").append(nestedList);
-
-			// Remove Nested Page
-			$.mobile.pageContainer.append(newPage);
-			$.mobile.document.one("pagechange", function(){
-				$.mobile.document.one("pagechange", function(){
-					$(".nested-list-page").remove();
-				});
-			});
-			//update data object
-			if( typeof data.toPage === "string" ) {
-				data.toPage = data.toPage.replace( "&" + key).replace( "undefined", "");
-				data.options.hash = "#" + pageID;
-			}
+			content: $("<div class='ui-content'></div>")
 		}
 	});
 })( jQuery, this );

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JQM latest - issue template</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet"  href="http://code.jquery.com/mobile/git/jquery.mobile-git.css">
+  <script src="http://code.jquery.com/jquery-1.10.1.js"></script>
+  
+  <script src="http://code.jquery.com/mobile/git/jquery.mobile-git.js"></script> 
+  <script src="jquery.mobile.nestedlists.js"></script>
+  <style>
+    #edit-with-js-bin { display: none !important; }
+  </style>
+</head>
+<body>
+ 
+  <div data-role="page">
+  
+    <div data-role="header">
+      <h1>jQuery Mobile Nestedlists</h1>
+    </div><!-- /header -->
+    
+    <div data-role="content" id="content">
+      <h3>Nestedlists is a plugin and that allows several styles of nested lists</h3>
+      <p>Some of these examples require a js plugin and some just a few css rules</p>
+      <p> plugin and css available at <a href="https://github.com/arschmitz/jquery-mobile-nestedlists/">https://github.com/arschmitz/jquery-mobile-nestedlists/</a>
+      </p>
+    <br>
+      <ul data-role="listview">
+        <li data-role="list-divider" data-theme="b"><h1>Seperate Page Sublists</h1></li>
+        <li>
+          <a href="#acura"><h1>Acura</h1>
+            <p>Multi-page template no css and no js</p>
+            <p>You dont need this!!!</p>
+          </a>
+        </li>
+        <li data-role="list-divider"><h1>Nested list page generated from markup requires plugin</h1></li>
+        <li>
+              Infiniti
+              <ul >
+                  <li>G37</li>
+                  <li>Q50</li>
+                  <li>M57</li>
+                  <li>FX</li>
+                  <li>EX</li>
+              </ul>
+        </li>
+        <li >
+              <h1>Audi</h1>
+              <ul >
+                <li>A6</li>
+                <li>S6</li>
+                <li>A7</li>
+                <li>S7</li>
+                <li>A8</li>
+                <li>S8</li>
+              </ul>
+          </li>
+          <li>
+              <h1>BMW</h1>
+              <ul >
+                <li>1 series</li>
+                <li>3 series</li>
+                <li>5 series</li>
+                <li>6 series</li>
+                <li>7 series</li>
+              </ul>
+          </li>
+          <li>
+              <h1>Cadillac
+              </h1>
+              <ul >
+                  <li>CTS</li>
+                  <li>ATS</li>
+                  <li>XTS</li>
+              </ul>
+        </li>
+        <li>
+            <h1>Lexus</h1>
+            <ul >
+              <li>IS</li>
+              <li>ES</li>
+              <li>GS</li>
+              <li>LS</li>
+            </ul>
+        </li>
+        <li>
+            <h1>Mercedes</h1>
+            <ul >
+              <li>A-Class</li>
+              <li>B-Class</li>
+              <li>C-Class</li>
+              <li>CL-Class</li>
+              <li>E-Class</li>
+            </ul>
+          </li>
+      </ul>
+      
+    </div><!-- /content -->
+  
+  </div><!-- /page -->
+  <div data-role="page" id="acura">
+  
+    <div data-role="header">
+      <a href="#" data-rel="back">back</a>
+      <h1>Issue template</h1>
+    </div><!-- /header -->
+    
+    <div data-role="content" id="content">
+      <ul data-role="listview">
+        <li>RLX</li>
+        <li>TL</li>
+        <li>TSX</li>
+        <li>ILX</li>
+        <li>ZDX</li>
+        <li>MDX</li>
+      </ul>
+    </div><!-- /content -->
+  
+  </div><!-- /page -->
+
+</body>
+</html>
