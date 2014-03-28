@@ -5,12 +5,23 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet"  href="http://code.jquery.com/mobile/git/jquery.mobile-git.css">
-	<script src="http://code.jquery.com/jquery-1.10.1.js"></script>
-	<script src="http://code.jquery.com/mobile/git/jquery.mobile-git.js"></script> 
+	<script src="//code.jquery.com/jquery-1.10.1.js"></script>
+	<script src="//code.jquery.com/mobile/git/jquery.mobile-git.js"></script>
 	<script src="jquery.mobile.nestedlists.js"></script>
 	<style>
 		#edit-with-js-bin { display: none !important; }
 	</style>
+	<script>
+		$( document ).on( "click", "#injectList", function(){
+			var list = "<ul><li>Item 1 i have a submenu" +
+			"<ul><li>submenuitem</li><li>submenuitem2</li></ul>" +
+			"<li>Item 2 i have no sub menu</li></ul>";
+			$( "#content" ).append( $( list ).listview({
+				childPages: true,
+				inset: true
+			}));
+		});
+	</script>
 </head>
 <body>
 	<div data-role="page">
@@ -23,7 +34,7 @@
 			<p> plugin and css available at <a href="https://github.com/arschmitz/jquery-mobile-nestedlists/">https://github.com/arschmitz/jquery-mobile-nestedlists/</a>
 			</p>
 			<br>
-			<ul data-role="listview">
+			<ul data-role="listview" data-child-pages="true">
 				<li data-role="list-divider" data-theme="b"><h1>Seperate Page Sublists</h1></li>
 				<li>
 					<a href="#acura"><h1>Acura</h1>
@@ -44,7 +55,7 @@
 				</li>
 				<li >
 					<h1>Audi</h1>
-					<ul >
+					<ul>
 						<li>A6</li>
 						<li>S6</li>
 						<li>A7</li>
@@ -64,8 +75,7 @@
 					</ul>
 				</li>
 				<li>
-					<h1>Cadillac
-					</h1>
+					<h1>Cadillac</h1>
 					<ul >
 						<li>CTS</li>
 						<li>ATS</li>
@@ -83,7 +93,7 @@
 				</li>
 				<li>
 					<h1>Mercedes</h1>
-					<ul >
+					<ul>
 						<li>A-Class</li>
 						<li>B-Class</li>
 						<li>C-Class</li>
@@ -92,6 +102,8 @@
 					</ul>
 				</li>
 			</ul>
+			<br/><br/>
+			<button id="injectList">Add Dynamic List</button>
 		</div><!-- /content -->
 	</div><!-- /page -->
 	<div data-role="page" id="acura">

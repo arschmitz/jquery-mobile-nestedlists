@@ -1,41 +1,61 @@
 (function( $, window, undefined ) {
-	$.mobile.document.on("pagecreate", "div", function(){
-		$("ul>li>ul").css("display","none");
-		$("ul>li>ul").parent().addClass("ui-btn ui-btn-icon-right ui-icon-carat-r");
-	});
-	$.mobile.document.on( "click", ".ui-listview>li", function(){
-		if( $(this).children( "ul" ).length == 0 ) {
-			return;
-		}
-		var newPage = $.mobile.nestedlists.page.clone().uniqueId(),
-			nestedList  = $( this ).children("ul").clone().attr( "data-" + $.mobile.ns + "role", "listview" ).css("display","block"),
-			pageName = ( $( this.childNodes[0] ).text().replace(/^\s+|\s+$/g, '').length > 0 )? $( this.childNodes[0] ).text() : $( this.childNodes[1] ).text(),
-			pageID = newPage.attr( "id" );
-
-		// Build new page
-		newPage.append($.mobile.nestedlists.header.clone().find("h1").text(pageName).end())
-			.append($.mobile.nestedlists.content.clone())
-			.find("div.ui-content").append(nestedList);
-
-		$.mobile.pageContainer.append(newPage);
-
-		$.mobile.changePage( "#" + pageID );
-
-		// Remove Nested Page
-		$.mobile.document.one( "pagechange", function(){
-			$.mobile.document.one( "pagechange", function(){
-				$.mobile.document.one( "pagechange", function(){
-					$(".nested-list-page").remove();
-				});
+	$.widget( "mobile.listview", $.mobile.listview, {
+		options: {
+			childPages: true,
+			page: "<div data-role='page'></div>",
+			header: "<div data-role='header'><a href='#' data-rel='back'>Back</a><h1></h1></div>",
+			content: "<div class='ui-content'></div>"
+		},
+		_create: function(){
+			this._super();
+			if( this.options.childPages ) {
+				this._attachBindings();
+				this.element.find( "ul" )
+					.css( "display","none" )
+					.parent()
+					.addClass("ui-btn ui-btn-icon-right ui-icon-carat-r");
+			}
+		},
+		_attachBindings: function() {
+			this._on({
+				"click": "_handleSubpageClick"
 			});
-		});
-	});
+			this._on( "body", {
+				"pagechange": function(){
+					if ( this.opening === true ) {
+						this.open = true;
+						this.opening = false;
+					} else if ( this.open === true ) {
+						this.newPage.remove();
+						this.open = false;
+					}
+				}
+			});
+		},
+		_handleSubpageClick: function( event ) {
+			if( $(event.target).children( "ul" ).length == 0 ) {
+				return;
+			}
+			this.opening = true;
+			this.newPage = $( this.options.page ).uniqueId();
+			this.nestedList  = $( event.target ).children( "ul" )
+				.clone().attr( "data-" + $.mobile.ns + "role", "listview" )
+				.css( "display", "block" );
+			this.pageName = (
+				$( event.target.childNodes[0] ).text().replace(/^\s+|\s+$/g, '').length > 0 )?
+				$( event.target.childNodes[0] ).text() : $( event.target.childNodes[1] ).text();
+			this.pageID = this.newPage.attr( "id" );
 
-	$.extend( $.mobile, {
-		nestedlists: {
-			page: $("<div data-role='page'></div>"),
-			header: $("<div data-role='header'><a href='#' data-rel='back'>Back</a><h1></h1></div>"),
-			content: $("<div class='ui-content'></div>")
+			// Build new page
+			this.newPage.append(
+				$( this.options.header ).find( "h1" ).text( this.pageName ).end()
+			).append(
+				$( this.options.content )
+			).find( "div.ui-content" ).append( this.nestedList );
+
+			$( "body" ).append( this.newPage );
+
+			$( "body" ).pagecontainer( "change", "#" + this.pageID );
 		}
 	});
 })( jQuery, this );
