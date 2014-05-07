@@ -33,7 +33,7 @@
 			});
 		},
 		_handleSubpageClick: function( event ) {
-			if( $(event.target).children( "ul" ).length == 0 ) {
+			if( $(event.target).closest( "li" ).children( "ul" ).length == 0 ) {
 				return;
 			}
 			this.opening = true;
