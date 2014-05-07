@@ -9,12 +9,21 @@
 		_create: function(){
 			this._super();
 			if( this.options.childPages ) {
-				this._attachBindings();
-				this.element.find( "ul" )
-					.css( "display","none" )
-					.parent()
-					.addClass("ui-btn ui-btn-icon-right ui-icon-carat-r");
+				this._setupChildren();
 			}
+		},
+		refresh: function() {
+			this._super();
+			if( this.options.childPages ) {
+				this._setupChildren();
+			}
+		},
+		_setupChildren: function() {
+			this._attachBindings();
+			this.element.find( "ul" )
+				.css( "display","none" )
+				.parent()
+				.addClass("ui-btn ui-btn-icon-right ui-icon-carat-r");
 		},
 		_attachBindings: function() {
 			this._on({
