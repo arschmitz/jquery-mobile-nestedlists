@@ -12,12 +12,6 @@
 				this._setupChildren();
 			}
 		},
-		refresh: function() {
-			this._super();
-			if( this.options.childPages ) {
-				this._setupChildren();
-			}
-		},
 		_setupChildren: function() {
 			this._attachBindings();
 			this.element.find( "ul" )
